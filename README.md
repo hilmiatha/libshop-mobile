@@ -1,3 +1,4 @@
+![image](https://github.com/hilmiatha/libshop-mobile/assets/108039453/e4b68e4d-d1bb-4501-8d65-94daa8131d1e)
 # LibShop
 Singkatan dari Library Shop
 ## Hilmi Atha Putra (2206830050 - PBP B)
