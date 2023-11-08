@@ -172,16 +172,252 @@ Singkatan dari Library Shop
             }
             }
         ```
+</details>
 
-  
+<details>
+<summary> TUGAS 8 </summary>
 
+### Pertanyaan
+1. Jelaskan perbedaan antara Navigator.push() dan Navigator.pushReplacement(), disertai dengan contoh mengenai penggunaan kedua metode tersebut yang tepat!
+2. Jelaskan masing-masing layout widget pada Flutter dan konteks penggunaannya masing-masing!
+3. Sebutkan apa saja elemen input pada form yang kamu pakai pada tugas kali ini dan jelaskan mengapa kamu menggunakan elemen input tersebut!
+4. Bagaimana penerapan clean architecture pada aplikasi Flutter?
+5. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial)
 
+### Jawaban
 
+1. Navigator.push() dan Navigator.pushReplacement() adalah dua metode yang digunakan dalam Flutter untuk menavigasi antara halaman atau layar aplikasi.
 
+    Navigator.push() digunakan untuk menambahkan halaman baru ke dalam tumpukan navigasi, sehingga pengguna dapat kembali ke halaman sebelumnya dengan menekan tombol kembali pada perangkat mereka. Contoh penggunaannya adalah ketika pengguna menekan tombol untuk membuka halaman detail dari suatu item pada daftar, maka halaman detail akan ditambahkan ke dalam tumpukan navigasi.
 
+    Sedangkan Navigator.pushReplacement() digunakan untuk mengganti halaman saat ini dengan halaman baru. Dalam hal ini, ketika pengguna menekan tombol kembali pada perangkat mereka, mereka akan langsung kembali ke halaman sebelumnya sebelum halaman saat ini. Contoh penggunaannya adalah ketika pengguna menyelesaikan suatu tugas pada halaman saat ini dan ingin kembali ke halaman sebelumnya, maka halaman saat ini akan diganti dengan halaman baru yang menampilkan pesan sukses atau ringkasan dari tugas yang telah selesai.
 
+2. Layout widget pada Flutter adalah widget yang digunakan untuk mengatur tata letak atau susunan dari widget-widget lainnya. Berikut adalah beberapa layout widget pada Flutter beserta konteks penggunaannya:
 
+    * Container: Widget ini digunakan untuk membuat kotak yang dapat diatur ukurannya, warnanya, dan dekorasinya. Container juga dapat digunakan untuk mengatur jarak antar widget dengan menggunakan properti padding dan margin.
 
+    * Row dan Column: Widget ini digunakan untuk mengatur tata letak secara horizontal (Row) atau vertikal (Column). Widget-widget yang ditempatkan di dalam Row atau Column akan diatur secara berurutan dari kiri ke kanan (Row) atau dari atas ke bawah (Column).
 
+    * Stack: Widget ini digunakan untuk menumpuk widget-widget di atas satu sama lain. Widget-widget yang ditempatkan di dalam Stack akan ditumpuk sesuai dengan urutan penempatannya.
+
+    * Expanded: Widget ini digunakan untuk mengisi ruang kosong yang tersisa pada Row atau Column. Widget yang ditempatkan di dalam Expanded akan diberikan ukuran yang tersisa setelah widget lainnya sudah diberikan ukuran.
+
+    * ListView: Widget ini digunakan untuk menampilkan daftar widget secara berurutan. ListView dapat digunakan untuk menampilkan daftar yang panjang atau tidak terbatas.
+
+    * GridView: Widget ini digunakan untuk menampilkan daftar widget dalam bentuk grid. GridView dapat digunakan untuk menampilkan daftar yang berisi banyak item dengan ukuran yang sama.
+
+    * Wrap: Widget ini digunakan untuk menampilkan daftar widget dalam bentuk baris yang dapat melintasi beberapa baris. Widget-widget yang ditempatkan di dalam Wrap akan diatur secara berurutan dari kiri ke kanan dan dari atas ke bawah.
+
+    * SizedBox: Widget ini digunakan untuk membuat kotak kosong dengan ukuran tertentu. SizedBox dapat digunakan untuk memberikan jarak antar widget atau untuk membuat widget dengan ukuran yang spesifik.
+
+    Setiap layout widget memiliki kegunaannya masing-masing dan dapat digunakan sesuai dengan kebutuhan dalam membuat tata letak pada aplikasi Flutter.
+
+3. Terdapat 3 elemen input yaitu `name` buku untuk menyimpan nama buku, `amount` untuk menyimpan jumlah buku, dan `description` untuk menyimpan deskripsi buku. Ketiga elemen input ini digunakan untuk mengisi data buku yang akan ditambahkan ke dalam database.
+
+4. Clean Architecture adalah sebuah konsep arsitektur perangkat lunak yang bertujuan untuk memisahkan kode menjadi beberapa lapisan dengan tujuan agar kode menjadi lebih mudah dipahami, diuji, dan diubah. Penerapan Clean Architecture pada aplikasi Flutter dapat dilakukan dengan mengikuti prinsip-prinsip berikut:
+
+    1. Memisahkan kode menjadi beberapa lapisan, yaitu:
+        - Presentation Layer: berisi kode yang berhubungan dengan tampilan aplikasi, seperti widget dan state management.
+        - Domain Layer: berisi kode yang berhubungan dengan bisnis logic aplikasi, seperti use case dan model.
+        - Data Layer: berisi kode yang berhubungan dengan pengambilan dan penyimpanan data, seperti repository dan data source.
+
+    2. Menggunakan Dependency Injection untuk menghubungkan antar lapisan. Dependency Injection adalah sebuah teknik yang digunakan untuk memasukkan objek yang dibutuhkan oleh suatu kelas melalui konstruktor atau setter, sehingga kelas tersebut tidak perlu membuat objek tersebut sendiri.
+
+    3. Menggunakan Interface untuk memisahkan antara implementasi dan definisi. Interface adalah sebuah kontrak yang digunakan untuk mendefinisikan perilaku suatu kelas. Dengan menggunakan interface, kita dapat memisahkan antara implementasi dan definisi, sehingga kode menjadi lebih mudah diuji dan diubah.
+
+    4. Menggunakan Unit Test untuk menguji setiap lapisan secara terpisah. Unit Test adalah sebuah teknik yang digunakan untuk menguji kode secara terpisah, sehingga kita dapat memastikan bahwa setiap lapisan berfungsi dengan baik.
+
+    Dalam penerapan Clean Architecture pada aplikasi Flutter, kita dapat menggunakan beberapa library seperti Provider untuk state management, Dio untuk HTTP request, dan Hive untuk penyimpanan data lokal. Dengan menggunakan library-library tersebut, kita dapat memisahkan kode menjadi beberapa lapisan dan mengikuti prinsip-prinsip Clean Architecture dengan lebih mudah.
+
+5. 
+    1. Membuat minimal satu halaman baru pada aplikasi, yaitu halaman formulir tambah item baru
+        * buat direktori baru dengan nama `screens` dan buat file dart baru bernama `shoplist_form.dart` di dalamnya.
+        * buatlah stateful widget bernama `ShopFormPage`
+        * membuat form dengan global key dengan menambahkan `final _formKey = GlobalKey<FormState>();` serta elemen input yang dibutuhkan, yaitu `name`, `amount`, dan `description`.
+        * buatlah form dalam body scaffold dan tambahkan validasi untuk semua elemen input. lalu tambahkan tombol save yang akan menampilkan dialog ketika berhasil disimpan.
+        ```
+        body: Form(
+            key: _formKey,
+            child: SingleChildScrollView(
+            child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                    Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                        decoration: InputDecoration(
+                        hintText: "Nama Buku",
+                        labelText: "Nama Buku",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                        ),
+                        ),
+                        onChanged: (String? value) {
+                        setState(() {
+                            _name = value!;
+                        });
+                        },
+                        validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                            return "Nama tidak boleh kosong!";
+                        }
+                        return null;
+                        },
+                    ),
+                    ),
+                    Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                        decoration: InputDecoration(
+                        hintText: "Jumlah",
+                        labelText: "Jumlah",
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(5.0),
+                        ),
+                        ),
+                        onChanged: (String? value) {
+                        setState(() {
+                            _amount = int.parse(value!);
+                        });
+                        },
+                        validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                            return "Harga tidak boleh kosong!";
+                        }
+                        if (int.tryParse(value) == null) {
+                            return "Harga harus berupa angka!";
+                        }
+                        return null;
+                        },
+                    ),
+                ),
+                    Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                    decoration: InputDecoration(
+                        hintText: "Deskripsi",
+                        labelText: "Deskripsi",
+                        border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                        ),
+                    ),
+                    onChanged: (String? value) {
+                        setState(() {
+                        _description = value!;
+                        });
+                    },
+                    validator: (String? value) {
+                        if (value == null || value.isEmpty) {
+                        return "Deskripsi tidak boleh kosong!";
+                        }
+                        return null;
+                    },
+                    ),
+                ),
+                Align(
+                    alignment: Alignment.bottomCenter,
+                    child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: ElevatedButton(
+                    style: ButtonStyle(
+                        backgroundColor:
+                        MaterialStateProperty.all(Colors.indigo),
+                    ),
+                    onPressed: () {
+                        if (_formKey.currentState!.validate()) {
+                        showDialog(
+                            context: context,
+                            builder: (context) {
+                            return AlertDialog(
+                                title: const Text('Buku berhasil tersimpan'),
+                                content: SingleChildScrollView(
+                                child: Column(
+                                    crossAxisAlignment:
+                                    CrossAxisAlignment.start,
+                                    children: [
+                                    Text('Nama: $_name'),
+                                    Text('Jumlah: $_amount'),
+                                    Text('Nama: $_description'),
+                                    ],
+                                ),
+                                ),
+                                actions: [
+                                TextButton(
+                                    child: const Text('OK'),
+                                    onPressed: () {
+                                    Navigator.pop(context);
+                                    },
+                                ),
+                                ],
+                            );
+                            },
+                        );
+                        onPressed(context);
+                        }
+                        _formKey.currentState!.reset();
+                    },
+                    child: const Text(
+                        "Save",
+                        style: TextStyle(color: Colors.white),
+                    ),
+                    ),
+                ),
+                ),
+            ]),
+        ),
+        )
+        ```
+    2. Mengarahkan pengguna ke halaman form tambah item baru ketika menekan tombol Tambah Item pada halaman utama.
+        * Pada bagian onTap pada `ShopCard`, manfaatkan fungsi dari widget navigator yaitu `Navigator.push()` untuk menambahkan halaman baru ke dalam tumpukan navigasi.
+        ```
+        if (item.name == "Tambah Item") {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const ShopFormPage()));
+          }
+        ```
+    3.  Membuat sebuah drawer pada aplikasi 
+        * dalam direktori widgets tambahkan file dart baru dengan nama `left_drawer.dart`. buatlah drawer header. Lalu buatlah widget ListTile untuk menyimpan menu-menu yang akan ditampilkan pada drawer. Jangan lupa gunakan widget navigator untuk mengarahkan pengguna ke halaman yang diinginkan.
+        ```
+        ...
+        ListTile(
+            leading: const Icon(Icons.home_outlined),
+            title: const Text('Halaman Utama'),
+            // Bagian redirection ke MyHomePage
+            onTap: () {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MyHomePage(),
+                  ));
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.add_shopping_cart),
+            title: const Text('Tambah Item'),
+            // Bagian redirection ke ShopFormPage
+            onTap: () {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ShopFormPage(),
+                  ));
+            },
+          ),
+          ListTile(
+            leading: const Icon(Icons.library_books),
+            title: const Text('Lihat Bukumu'),
+            onTap: () {
+              Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const DataBukuPage(),
+                  ));
+            },
+          ),
+        ...
+        ``` 
+6. BONUS
+    
+    buatlah class `Buku` pada `shoplist_form.dart` untuk menginisiasi objek buku saat menekan tombol save (apabila valid). lalu buat `globals.dart` untuk menyimpan semua variabel global, dalam konteks ini untuk menyimpan list buku yang telah dibuat. Kemudian buat tampilan baru yaitu `data_buku.dart` untuk menampilkan list buku yang telah dibuat. jangan lupa buat ListTile baru di dalam drawer dan lakukan routing untuk menuju page `data_buku.dart`
 
 </details>
