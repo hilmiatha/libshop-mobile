@@ -157,14 +157,14 @@ class _ShopFormPageState extends State<ShopFormPage> {
                               TextButton(
                                 child: const Text('OK'),
                                 onPressed: () {
-                                  Navigator.pop(context);
+                                  onPressed(context);
                                 },
                               ),
                             ],
                           );
                         },
                       );
-                      onPressed(context);
+
                     }
                     _formKey.currentState!.reset();
                   },
