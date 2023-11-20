@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:libshop_mobile/screens/menu.dart';
 import 'package:libshop_mobile/screens/shoplist_form.dart';
-import 'package:libshop_mobile/screens/data_buku.dart';
+import 'package:libshop_mobile/screens/list_dart.dart';
 
 
 
@@ -65,14 +65,14 @@ class LeftDrawer extends StatelessWidget {
             },
           ),
           ListTile(
-            leading: const Icon(Icons.library_books),
-            title: const Text('Lihat Bukumu'),
+            leading: const Icon(Icons.shopping_basket),
+            title: const Text('Daftar Produk'),
             onTap: () {
-              Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const DataBukuPage(),
-                  ));
+              // Route menu ke halaman produk
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const ProductPage()),
+              );
             },
           ),
         ],

@@ -1,7 +1,13 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:libshop_mobile/widgets/left_drawer.dart';
 import 'package:libshop_mobile/widgets/globals.dart' as globals;
-import 'package:libshop_mobile/screens/data_buku.dart';
+import 'package:libshop_mobile/screens/list_dart.dart';
+import 'package:pbp_django_auth/pbp_django_auth.dart';
+import 'package:provider/provider.dart';
+
+import 'menu.dart';
 
 class ShopFormPage extends StatefulWidget {
   const ShopFormPage({super.key});
@@ -10,33 +16,28 @@ class ShopFormPage extends StatefulWidget {
   State<ShopFormPage> createState() => _ShopFormPageState();
 }
 
-class Buku {
-  late String name;
-  late int amount;
-  late String description;
-
-  Buku(
-      {required this.name, required this.amount, required this.description});
-}
+// class Buku {
+//   late String name;
+//   late int amount;
+//   late String description;
+//
+//   Buku(
+//       {required this.name, required this.amount, required this.description});
+// }
 
 class _ShopFormPageState extends State<ShopFormPage> {
   final _formKey = GlobalKey<FormState>();
   String _name = "";
   int _amount = 0;
   String _description = "";
+  int _price = 0;
+  String _genre = "";
 
-  onPressed(BuildContext context) {
-    var data =
-      Buku(name: _name, amount: _amount, description: _description);
-    globals.semuaBuku.add(data);
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const DataBukuPage()),
-    );
-  }
+
 
   @override
   Widget build(BuildContext context) {
+    final request = context.watch<CookieRequest>();
     return Scaffold(
       appBar: AppBar(
         title: const Center(
@@ -126,6 +127,52 @@ class _ShopFormPageState extends State<ShopFormPage> {
                   },
                 ),
               ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      hintText: "Price",
+                      labelText: "Price",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                    ),
+                    onChanged: (String? value) {
+                      setState(() {
+                        _price = int.parse(value!);
+                      });
+                    },
+                    validator: (String? value) {
+                      if (value == null || value.isEmpty) {
+                        return "Harga tidak boleh kosong!";
+                      }
+                      return null;
+                    },
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: TextFormField(
+                    decoration: InputDecoration(
+                      hintText: "Genre",
+                      labelText: "Genre",
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                    ),
+                    onChanged: (String? value) {
+                      setState(() {
+                        _genre = value!;
+                      });
+                    },
+                    validator: (String? value) {
+                      if (value == null || value.isEmpty) {
+                        return "Genre tidak boleh kosong!";
+                      }
+                      return null;
+                    },
+                  ),
+                ),
               Align(
                 alignment: Alignment.bottomCenter,
                 child: Padding(
@@ -135,39 +182,37 @@ class _ShopFormPageState extends State<ShopFormPage> {
                     backgroundColor:
                     MaterialStateProperty.all(Colors.indigo),
                   ),
-                  onPressed: () {
-                    if (_formKey.currentState!.validate()) {
-                      showDialog(
-                        context: context,
-                        builder: (context) {
-                          return AlertDialog(
-                            title: const Text('Buku berhasil tersimpan'),
-                            content: SingleChildScrollView(
-                              child: Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
-                                children: [
-                                  Text('Nama: $_name'),
-                                  Text('Jumlah: $_amount'),
-                                  Text('Nama: $_description'),
-                                ],
-                              ),
-                            ),
-                            actions: [
-                              TextButton(
-                                child: const Text('OK'),
-                                onPressed: () {
-                                  onPressed(context);
-                                },
-                              ),
-                            ],
-                          );
-                        },
-                      );
+                    onPressed: () async {
+                      if (_formKey.currentState!.validate()) {
+                        final response = await request.postJson(
+                            "http://hilmi-atha-tugas.pbp.cs.ui.ac.id/create-flutter/",
+                            jsonEncode(<String, String>{
+                              'name': _name,
+                              'amount': _amount.toString(),
+                              'description': _description,
+                              'price' : _price.toString(),
+                              'genre' : _genre,
 
-                    }
-                    _formKey.currentState!.reset();
-                  },
+                              // TODO: Sesuaikan field data sesuai dengan aplikasimu
+                            }));
+                        if (response['status'] == 'success') {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content: Text("Produk baru berhasil disimpan!"),
+                          ));
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(builder: (context) => MyHomePage()),
+                          );
+                        } else {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                            content:
+                            Text("Terdapat kesalahan, silakan coba lagi."),
+                          ));
+                        }
+                      }
+                    },
                   child: const Text(
                     "Save",
                     style: TextStyle(color: Colors.white),

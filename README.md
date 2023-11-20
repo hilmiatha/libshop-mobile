@@ -421,3 +421,69 @@ Singkatan dari Library Shop
     buatlah class `Buku` pada `shoplist_form.dart` untuk menginisiasi objek buku saat menekan tombol save (apabila valid). lalu buat `globals.dart` untuk menyimpan semua variabel global, dalam konteks ini untuk menyimpan list buku yang telah dibuat. Kemudian buat tampilan baru yaitu `data_buku.dart` untuk menampilkan list buku yang telah dibuat. jangan lupa buat ListTile baru di dalam drawer dan lakukan routing untuk menuju page `data_buku.dart`
 
 </details>
+
+
+<details>
+<summary> TUGAS 9 </summary>
+
+### Pertanyaan :
+1. Apakah bisa kita melakukan pengambilan data JSON tanpa membuat model terlebih dahulu? Jika iya, apakah hal tersebut lebih baik daripada membuat model sebelum melakukan pengambilan data JSON?
+2. Jelaskan fungsi dari CookieRequest dan jelaskan mengapa instance CookieRequest perlu untuk dibagikan ke semua komponen di aplikasi Flutter
+3.  Jelaskan mekanisme pengambilan data dari JSON hingga dapat ditampilkan pada Flutter.
+4. Jelaskan mekanisme autentikasi dari input data akun pada Flutter ke Django hingga selesainya proses autentikasi oleh Django dan tampilnya menu pada Flutter.
+5. Sebutkan seluruh widget yang kamu pakai pada tugas ini dan jelaskan fungsinya masing-masing.
+6. Jelaskan bagaimana cara kamu mengimplementasikan checklist di atas secara step-by-step! (bukan hanya sekadar mengikuti tutorial).
+
+
+### Jawaban :
+1. Ya, kita bisa melakukan pengambilan data JSON tanpa membuat model terlebih dahulu. Namun, membuat model sebelum melakukan pengambilan data JSON memiliki beberapa keuntungan:
+
+    * Type Safety: Dengan membuat model, kita dapat menentukan tipe data yang tepat untuk setiap properti dalam JSON. Ini membantu mencegah kesalahan tipe data saat mengakses data JSON.
+
+    * Code Readability: Dengan model yang jelas, kode menjadi lebih mudah dibaca dan dipahami. Model memberikan struktur yang terorganisir untuk data JSON, sehingga memudahkan pengembang dalam memahami bagaimana data JSON diakses dan digunakan.
+
+    * Autocomplete dan Code Suggestions: Dalam banyak IDE, ketika kita menggunakan model, kita dapat memanfaatkan fitur autocomplete dan saran kode. IDE akan memberikan saran tentang properti yang tersedia dalam model saat kita menulis kode, sehingga mempercepat proses pengembangan.
+
+    * Data Validation: Dengan model, kita dapat menerapkan validasi data. Kita dapat menentukan aturan validasi untuk setiap properti dalam model, sehingga memastikan bahwa data yang diterima sesuai dengan harapan.
+
+    Meskipun kita bisa melakukan pengambilan data JSON tanpa membuat model terlebih dahulu, membuat model sebelumnya memiliki banyak manfaat dan disarankan untuk meningkatkan kualitas dan keamanan kode.
+
+2. Kelas CookieRequest adalah kelas yang bertanggung jawab untuk membuat dan mengelola permintaan HTTP yang melibatkan cookie. Ini digunakan untuk mengirim permintaan ke server yang memerlukan informasi cookie untuk otentikasi atau sesi.
+
+    Instance CookieRequest perlu dibagikan ke semua komponen di aplikasi Flutter agar informasi cookie dapat diakses dan digunakan secara konsisten di seluruh aplikasi. Ketika instance CookieRequest dibagikan, semua komponen dapat menggunakan instance yang sama untuk mengirim permintaan HTTP dengan cookie yang sama.
+
+    Ini penting karena ketika aplikasi berinteraksi dengan server, informasi cookie yang diperoleh dari respons server harus disimpan dan digunakan dalam permintaan selanjutnya. Jika setiap komponen memiliki instance CookieRequest yang terpisah, maka setiap komponen akan memiliki informasi cookie yang berbeda, yang dapat menyebabkan masalah dalam otentikasi atau sesi.
+
+    Dengan membagikan instance CookieRequest ke semua komponen, kita memastikan bahwa semua komponen menggunakan informasi cookie yang sama. Ini memastikan konsistensi dalam otentikasi atau sesi di seluruh aplikasi.
+
+3. Untuk mengambil data dari JSON dan menampilkannya di Flutter, Anda dapat mengikuti langkah-langkah berikut:
+
+    * Membaca data JSON: Pertama, Anda perlu mengambil data JSON dari sumbernya. Ini bisa berupa API endpoint, file JSON lokal, atau sumber data lainnya. Anda dapat menggunakan package http untuk mengirim permintaan HTTP ke API endpoint dan mendapatkan respons JSON. Jika Anda memiliki file JSON lokal, Anda dapat menggunakan package dart:convert untuk membaca file tersebut.
+
+    * Parsing data JSON: Setelah Anda mendapatkan respons JSON, langkah selanjutnya adalah mem-parsing data tersebut agar dapat digunakan di Flutter. Anda dapat menggunakan package dart:convert untuk mengubah respons JSON menjadi objek Dart yang dapat Anda gunakan di aplikasi Flutter. Misalnya, Anda dapat menggunakan metode jsonDecode() untuk mengubah respons JSON menjadi objek Dart.
+
+    * Membuat model data: Untuk mempermudah penggunaan data JSON di aplikasi Flutter, Anda dapat membuat model data yang sesuai dengan struktur JSON. Model data ini akan mewakili entitas atau objek dalam JSON. Anda dapat membuat kelas Dart dengan properti yang sesuai dengan struktur JSON dan metode untuk mengonversi objek Dart menjadi JSON dan sebaliknya. Ini akan membantu dalam mengakses dan memanipulasi data JSON dengan lebih mudah.
+
+    * Menampilkan data di Flutter: Setelah Anda memiliki data JSON yang sudah diparsing dan model data yang sesuai, Anda dapat menampilkannya di aplikasi Flutter. Anda dapat menggunakan widget seperti ListView, GridView, atau DataTable untuk menampilkan data dalam bentuk daftar, grid, atau tabel. Anda dapat mengakses properti dari objek model data untuk menampilkan nilai-nilai yang relevan di widget.
+
+4. Mekanisme autentikasi antara Flutter dan Django melibatkan beberapa langkah. Berikut adalah langkah-langkah umum yang terjadi dalam proses autentikasi dari input data akun pada Flutter hingga selesainya proses autentikasi oleh Django dan tampilnya menu pada Flutter:
+
+    Pengguna memasukkan data akun pada aplikasi Flutter, seperti nama pengguna dan kata sandi.
+    Aplikasi Flutter mengirim permintaan HTTP ke server Django yang berisi data akun yang dimasukkan oleh pengguna.
+    Server Django menerima permintaan dan memeriksa data akun yang diterima.
+    Django menggunakan mekanisme autentikasi bawaan atau pustaka autentikasi pihak ketiga, seperti Django REST Framework, untuk memverifikasi data akun yang diterima.
+    Jika data akun valid, Django akan menghasilkan token akses atau sesi yang unik untuk pengguna tersebut.
+    Server Django mengirimkan token akses atau sesi kembali ke aplikasi Flutter sebagai respons.
+    Aplikasi Flutter menyimpan token akses atau sesi yang diterima untuk digunakan dalam permintaan selanjutnya.
+    Setiap kali pengguna ingin mengakses menu atau fitur yang memerlukan autentikasi, aplikasi Flutter akan menyertakan token akses atau sesi dalam permintaan HTTP ke server Django.
+    Server Django memeriksa keabsahan token akses atau sesi yang diterima dari aplikasi Flutter.
+    Jika token akses atau sesi valid, server Django mengizinkan akses ke menu atau fitur yang diminta.
+    Server Django mengirimkan data menu atau fitur yang diminta kembali ke aplikasi Flutter sebagai respons.
+    Aplikasi Flutter menampilkan menu atau fitur yang diterima dari server Django kepada pengguna.
+    Dalam proses ini, token akses atau sesi digunakan untuk mengidentifikasi dan mengotentikasi pengguna di setiap permintaan yang dilakukan oleh aplikasi Flutter ke server Django. Token ini memastikan bahwa hanya pengguna yang terotentikasi yang dapat mengakses menu atau fitur yang memerlukan autentikasi.
+
+
+
+
+
+</details>
