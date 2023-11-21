@@ -2,8 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:libshop_mobile/widgets/left_drawer.dart';
-import 'package:libshop_mobile/widgets/globals.dart' as globals;
-import 'package:libshop_mobile/screens/list_dart.dart';
 import 'package:pbp_django_auth/pbp_django_auth.dart';
 import 'package:provider/provider.dart';
 
@@ -185,7 +183,7 @@ class _ShopFormPageState extends State<ShopFormPage> {
                     onPressed: () async {
                       if (_formKey.currentState!.validate()) {
                         final response = await request.postJson(
-                            "http://hilmi-atha-tugas.pbp.cs.ui.ac.id/create-flutter/",
+                            "https://hilmi-atha-tugas.pbp.cs.ui.ac.id/create-flutter/",
                             jsonEncode(<String, String>{
                               'name': _name,
                               'amount': _amount.toString(),

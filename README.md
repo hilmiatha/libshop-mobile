@@ -482,6 +482,27 @@ Singkatan dari Library Shop
     Aplikasi Flutter menampilkan menu atau fitur yang diterima dari server Django kepada pengguna.
     Dalam proses ini, token akses atau sesi digunakan untuk mengidentifikasi dan mengotentikasi pengguna di setiap permintaan yang dilakukan oleh aplikasi Flutter ke server Django. Token ini memastikan bahwa hanya pengguna yang terotentikasi yang dapat mengakses menu atau fitur yang memerlukan autentikasi.
 
+5. Terdapat 2 widget yang digunakan yaitu left_drawer untuk menampilkan drawer dan shop_card sebagai tombol card pada menu
+
+6.  *  Memastikan deployment proyek tugas Django kamu telah berjalan dengan baik.
+        * Sudah berjalan dengan baik bisa diakses di https://hilmi-atha-tugas.pbp.cs.ui.ac.id/
+    * Membuat halaman login pada proyek tugas Flutter.
+        * Mmembuat screen baru dengan nama `login.dart` pada folder `screens` dan membuat stateful widget bernama `LoginPage`. Ubah `main.dart` untuk mengarahkan ke halaman login.
+    * Mengintegrasikan sistem autentikasi Django dengan proyek tugas Flutter.
+        * Membuat app baru pada projek django yaitu `authentication` buat fungsi views untuk login dan atur routing yang diperlukan.
+        * akses fungsi tersebut pada file `login.dart` dengan menggunakan package `http` dan `dart:convert` untuk mengirim data ke server dan menerima responsnya.
+    * Membuat model kustom sesuai dengan proyek aplikasi Django.
+        * dapatkan endpoint json pada projek django sebelumnya.
+        * convert json menjadi model dengan menggunakan package `quicktype`
+        * buat dierectory `models` dan buat model `item.dart` dan paste hasil convert json tadi.
+    * Membuat halaman yang berisi daftar semua item yang terdapat pada endpoint JSON di Django yang telah kamu deploy.
+        * buat screens baru untuk menampilkan semua data yaitu `list_dart.dart`
+        * buat stateful widget bernama `ProductPage`lalu buatlah fungsi untuk fetch data pada proyek django
+        * tampilkan semua iterasi data yang diambil dari proyek django dengan menggunakan widget `FutureBuilder`
+    * Membuat halaman detail untuk setiap item yang terdapat pada halaman daftar Item.
+        * dalam listbuilder pada screen `list_dart.dart` tambahkan `onTap` untuk mengarahkan ke halaman detail
+        * buatlah screen baru dengan nama `detail.dart` dan buat stateful widget bernama `DetailPage`
+        * tampilkan semua atribut data dan tambahkan tombol back untuk kembali ke halaman sebelumnya
 
 
 

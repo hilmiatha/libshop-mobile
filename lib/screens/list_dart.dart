@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:libshop_mobile/models/item.dart';
+import 'package:libshop_mobile/screens/detail.dart';
 
 import 'package:libshop_mobile/widgets/left_drawer.dart';
 
@@ -15,7 +16,7 @@ class ProductPage extends StatefulWidget {
 class _ProductPageState extends State<ProductPage> {
   Future<List<Item>> fetchProduct() async {
     var url = Uri.parse(
-        'http://hilmi-atha-tugas.pbp.cs.ui.ac.id/json/');
+        'https://hilmi-atha-tugas.pbp.cs.ui.ac.id/json/');
     var response = await http.get(
       url,
       headers: {"Content-Type": "application/json"},
@@ -61,7 +62,17 @@ class _ProductPageState extends State<ProductPage> {
                 } else {
                   return ListView.builder(
                       itemCount: snapshot.data!.length,
-                      itemBuilder: (_, index) => Container(
+                      itemBuilder: (_, index) => GestureDetector(
+                        onTap: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ItemDetailPage(item: snapshot.data![index]),
+                            ),
+                          );
+                        },
+
+                        child: Container(
                         margin: const EdgeInsets.symmetric(
                             horizontal: 16, vertical: 12),
                         padding: const EdgeInsets.all(20.0),
@@ -83,9 +94,13 @@ class _ProductPageState extends State<ProductPage> {
                                 "${snapshot.data![index].fields.description}")
                           ],
                         ),
-                      ));
+                      ),
+                    ),   
+                  );
                 }
               }
-            }));
+            }
+          )
+        );
   }
 }
